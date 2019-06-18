@@ -18,7 +18,7 @@
         .label('name')
         .size('size')
         .color((d, parent) => color(parent ? parent.data.name : null))
-        .tooltipContent((d, node, k) => `Size: <i>${node.value}</i> <br> k: ${k} <br> pxperchar: ${(node.x1 - node.x0) * k / d.name.length} <br> height: ${(node.y1 - node.y0) * k}`)
+        .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
         (document.getElementById('chart'));
     });
   </script>
