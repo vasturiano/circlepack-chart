@@ -1,3 +1,3 @@
-import './style.css';
+import './circlepack.css';
 
-export { default } from './__my_module_name__';
+export { default } from './circlepack';

@@ -1,26 +1,30 @@
 {
-  "name": "__my_module_name__",
+  "name": "circlepack-chart",
   "version": "0.1.0",
-  "description": "",
+  "description": "A circle packing interactive chart web component for visualizing hierarchical data",
   "license": "MIT",
-  "unpkg": "dist/__my_module_name__.min.js",
-  "main": "dist/__my_module_name__.common.js",
-  "module": "dist/__my_module_name__.module.js",
+  "unpkg": "dist/circlepack-chart.min.js",
+  "main": "dist/circlepack-chart.common.js",
+  "module": "dist/circlepack-chart.module.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vasturiano/__my_module_name__.git"
+    "url": "git+https://github.com/vasturiano/circlepack-chart.git"
   },
-  "homepage": "https://github.com/vasturiano/__my_module_name__",
+  "homepage": "https://github.com/vasturiano/circlepack-chart",
   "keywords": [
-    "",
-    ""
+    "circle-packing",
+    "chart",
+    "data-visualization",
+    "d3",
+    "hierarchical",
+    "svg"
   ],
   "author": {
     "name": "Vasco Asturiano",
     "url": "http://bl.ocks.org/vasturiano"
   },
   "bugs": {
-    "url": "https://github.com/vasturiano/__my_module_name__/issues"
+    "url": "https://github.com/vasturiano/circlepack-chart/issues"
   },
   "files": [
     "dist/**/*"
@@ -28,7 +32,7 @@
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -c -w",
-    "minify": "terser dist/__my_module_name__.js -o dist/__my_module_name__.min.js -c -m --comments '/Version/'",
+    "minify": "terser dist/circlepack-chart.js -o dist/circlepack-chart.min.js -c -m --comments '/Version/'",
     "build-module": "rollup -c rollup.config.module.js",
     "prepare": "npm run build && npm run minify && npm run build-module"
   },
@@ -44,10 +48,10 @@
     "postcss-nested": "^4.1.2",
     "postcss-simple-vars": "^5.0.2",
     "rimraf": "^2.6.3",
-    "rollup": "^1.15.1",
+    "rollup": "^1.15.6",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-node-resolve": "^5.0.1",
+    "rollup-plugin-node-resolve": "^5.0.3",
     "rollup-plugin-postcss": "^2.0.3",
     "terser": "^4.0.0"
   }
