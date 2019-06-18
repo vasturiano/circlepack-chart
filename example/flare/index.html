@@ -1,0 +1,25 @@
+<head>
+  <script src="//unpkg.com/d3"></script>
+
+  <script src="//unpkg.com/circlepack-chart"></script>
+  <!--<script src="../../dist/circlepack-chart.js"></script>-->
+
+  <style>body { margin: 0 }</style>
+</head>
+<body>
+  <div id="chart"></div>
+
+  <script>
+    const color = d3.scaleOrdinal(d3.schemePaired);
+
+    fetch('flare.json').then(res => res.json()).then(data => {
+      const t = CirclePack()
+        .data(data)
+        .label('name')
+        .size('size')
+        .color((d, parent) => color(parent ? parent.data.name : null))
+        .tooltipContent((d, node, k) => `Size: <i>${node.value}</i> <br> k: ${k} <br> pxperchar: ${(node.x1 - node.x0) * k / d.name.length} <br> height: ${(node.y1 - node.y0) * k}`)
+        (document.getElementById('chart'));
+    });
+  </script>
+</body>
