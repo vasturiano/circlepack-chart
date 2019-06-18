@@ -5,16 +5,18 @@ circlepack-chart
 [![Build Size][build-size-img]][build-size-url]
 [![Dependencies][dependencies-img]][dependencies-url]
 
-<-- short description -->.
-
 <p align="center">
-     <a href="https://vasturiano.github.io/circlepack-chart/example/basic"><img width="80%" src="https://vasturiano.github.io/circlepack-chart/example/preview.png"></a>
+  <a href="https://vasturiano.github.io/circlepack-chart/example/flare"><img width="80%" src="https://vasturiano.github.io/circlepack-chart/example/preview.png"></a>
 </p>
 
-<-- long description -->.
+An interactive circle packing chart for visualizing proportions in hierarchical data, where nodes of a tree are represented as nested circles. 
 
-Check out the examples:
-* [Basic](https://vasturiano.github.io/circlepack-chart/example/basic/) ([source](https://github.com/vasturiano/circlepack-chart/blob/master/example/basic/index.html))
+Supports zooming interactions via mouse-wheel events or by clicking on a node, which focuses the viewport on the associated sub-tree. Clicking in the chart's background resets the zoom to its initial position.
+The chart also responds to data changes by animating the dimensions of each of the nodes into their new positions. 
+
+For improved performance, circles with radius smaller than a given threshold (`minCircleRadius`) are excluded from the DOM, allowing for representation of large data sets while maintaining a smooth interaction. See [here for an example](https://vasturiano.github.io/circlepack-chart/example/large-data) of a randomly generated large data structure.
+
+See also the [Treemap](https://github.com/vasturiano/treemap-chart), [Icicle](https://github.com/vasturiano/icicle-chart) and [Sunburst](https://github.com/vasturiano/sunburst-chart) charts.
 
 ## Quick start
 
@@ -31,16 +33,59 @@ or even
 ```
 then
 ```
-var myGraph = CirclePack();
-myGraph(<myDOMElement>)
-    .prop(...);
+var myChart = CirclePack();
+myChart
+    .data(<myData>)
+    (<myDOMElement>);
 ```
 
 ## API reference
 
 | Method | Description | Default |
 | --- | --- | :--: |
-| <b>data</b>([<i>array</i>]) | Getter/setter for element data. | `[]` |
+| <b>data</b>([<i>object</i>]) | Getter/setter for chart data (see below for syntax details). | `[]` |
+| <b>width</b>([<i>number</i>]) | Getter/setter for the chart width in px. | *&lt;window width&gt;* |
+| <b>height</b>([<i>number</i>]) | Getter/setter for the chart height in px. | *&lt;window height&gt;* |
+| <b>children</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a data node's children accessor, used to establish the hierarchical relationship between nodes. Supports either a <i>string</i> indicating the object's property name, or a `function(node)` which should return an array of nodes. | `children` |
+| <b>label</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object label accessor, used to display labels on the circles and their tooltips. | `name` |
+| <b>size</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object size accessor, used to compute the areas of the circles. | `value` |
+| <b>padding</b>([<i>number</i>]) | Getter/setter for the amount of padding between adjacent circles, in px. | `4` |
+| <b>color</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object color accessor, used to color the circles. | <i>grey</i> |
+| <b>minCircleRadius</b>([<i>number</i>]) | Getter/setter for the minimum radius of a circle (in px) required for it to be rendered in the DOM. | `3` |
+| <b>sort</b>([<i>fn</i>]) | Getter/setter for the compare method used to sort sibling circles. A value of `null` (*default*) maintains the existing order found in the input data structure. This method is equivalent to [d3-hierarchy's sort](https://github.com/d3/d3-hierarchy#node_sort), it receives two arguments representing two sibling nodes and expects a numeric return value (`-1`, `0` or `1`) indicating the order. Each element is an instance of [d3-hierarchy node](https://github.com/d3/d3-hierarchy#hierarchy) and has several useful properties to specify order: `data` (the corresponding data object), `value` (summed value of node and all its descendants) and `depth` (layer degree). For [example](https://vasturiano.github.io/circlepack-chart/example/sort-by-size/), to order circles by size, use: `(a, b) => b.value - a.value`. | *&lt;existing order*&gt; |
+| <b>showLabels</b>([<i>boolean</i>]) | Getter/setter for whether to show labels in the nodes. Regardless of this setting, labels too large to fit within a circle's diameter are automatically hidden. | `true` |
+| <b>tooltipContent</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object tooltip content accessor. Use this to specify extra content in each of the circle's tooltips in addition to the node's full hierarchical name that's included by default. | |
+| <b>zoomToNode</b>([<i>node</i>]) | Programmatically zoom the chart to a particular node. | |
+| <b>zoomBy</b>([<i>number</i>]) | Programmatically zoom the chart by a specific amount. `1` is unity, above one indicates a zoom-in and below a zoom-out. | |
+| <b>zoomReset</b>() | Programmatically reset the zoom to the global view. | |
+| <b>onClick</b>([<i>fn</i>]) | Callback function for click events. Includes the data node object (or `null` if clicking on the background) as single argument. A falsy value (default) automatically zooms on clicked circles, equivalent to `myChart.onClick(myChart.zoomToNode)`. | |
+
+## Data syntax
+
+```
+{
+  name: "root"
+  children: [
+    {
+      name: "leafA",
+      value: 3
+    },
+    {
+      name: "nodeB",
+      children: [
+        {
+          name: "leafBA",
+          value: 5
+        },
+        {
+          name: "leafBB",
+          value: 1
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Giving Back
 
