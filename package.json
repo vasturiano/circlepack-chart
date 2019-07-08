@@ -4,6 +4,7 @@
   "description": "A circle packing interactive chart web component for visualizing hierarchical data",
   "license": "MIT",
   "unpkg": "dist/circlepack-chart.min.js",
+  "jsdelivr": "dist/circlepack-chart.min.js",
   "main": "dist/circlepack-chart.common.js",
   "module": "dist/circlepack-chart.module.js",
   "repository": {
