@@ -30,6 +30,10 @@
   fill: #F7F7F7;
 }
 
+.circlepack-viz {
+  position: relative;
+}
+
 .circlepack-tooltip {
   display: none;
   position: absolute;
