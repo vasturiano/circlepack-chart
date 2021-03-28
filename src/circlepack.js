@@ -1,4 +1,4 @@
-import { select as d3Select, event as d3Event, mouse as d3Mouse } from 'd3-selection';
+import { select as d3Select, pointer as d3Pointer } from 'd3-selection';
 import { scaleLinear } from 'd3-scale';
 import { hierarchy as d3Hierarchy, pack as d3Pack } from 'd3-hierarchy';
 import { transition as d3Transition } from 'd3-transition';
@@ -106,8 +106,8 @@ export default Kapsule({
     state.tooltip = el.append('div')
       .attr('class', 'chart-tooltip circlepack-tooltip');
 
-    el.on('mousemove', function() {
-      const mousePos = d3Mouse(this);
+    el.on('mousemove', function(ev) {
+      const mousePos = d3Pointer(ev);
       state.tooltip
         .style('left', mousePos[0] + 'px')
         .style('top', mousePos[1] + 'px')
@@ -181,12 +181,12 @@ export default Kapsule({
       .attr('id', d => `circle-${d.id}`)
       .attr('r', 0)
       .style('stroke-width', 1)
-      .on('click', d => {
-        d3Event.stopPropagation();
+      .on('click', (ev, d) => {
+        ev.stopPropagation();
         (state.onClick || this.zoomToNode)(d.data);
       })
-      .on('mouseover', d => {
-        d3Event.stopPropagation();
+      .on('mouseover', (ev, d) => {
+        ev.stopPropagation();
         state.onHover && state.onHover(d.data);
 
         state.tooltip.style('display', state.showTooltip(d.data, d) ? 'inline' : 'none');
