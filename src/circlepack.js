@@ -26,6 +26,7 @@ export default Kapsule({
     },
     padding: { default: 4, onChange(_, state) { state.needsReparse = true }},
     color: { default: d => 'lightgrey' },
+    nodeClassName: {}, // Additional css classes to add on each circle node
     minCircleRadius: { default: 3 },
     excludeRoot: { default: false, onChange(_, state) { state.needsReparse = true }},
     showLabels: { default: true },
@@ -164,6 +165,7 @@ export default Kapsule({
 
     const nameOf = accessorFn(state.label);
     const colorOf = accessorFn(state.color);
+    const nodeClassNameOf = accessorFn(state.nodeClassName);
 
     const animate = !state.skipTransitionsOnce;
     state.skipTransitionsOnce = false;
@@ -174,7 +176,6 @@ export default Kapsule({
 
     // Entering
     const newCell = cell.enter().append('g')
-      .attr('class', 'node')
       .attr('transform', d => `translate(${d.x},${d.y})`);
 
     newCell.append('circle')
@@ -219,6 +220,11 @@ export default Kapsule({
 
     // Entering + Updating
     const allCells = cell.merge(newCell);
+
+    allCells.attr('class', d => [
+      'node',
+      ...(`${nodeClassNameOf(d.data) || ''}`.split(' ').map(str => str.trim()))
+    ].filter(s => s).join(' '));
 
     allCells.transition(transition)
       .attr('transform', d => `translate(${d.x},${d.y})`);
