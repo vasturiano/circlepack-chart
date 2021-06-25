@@ -73,6 +73,9 @@ export interface CirclePackChartGenericInstance<ChainableInstance> {
   zoomToNode(node: Node): ChainableInstance;
   zoomBy(k: number):ChainableInstance;
   zoomReset():ChainableInstance;
+
+  transitionDuration(): number;
+  transitionDuration(duration: number): ChainableInstance;
 }
 
 export type CirclePackChartInstance = CirclePackChartGenericInstance<CirclePackChartInstance>;
