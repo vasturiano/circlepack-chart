@@ -34,7 +34,8 @@ export default Kapsule({
     tooltipContent: { default: d => '', triggerUpdate: false },
     onClick: { triggerUpdate: false },
     onHover: { triggerUpdate: false },
-    transitionDuration: { default: 800, triggerUpdate: false }
+    transitionDuration: { default: 800, triggerUpdate: false },
+    strokeWidth: { default: 1 },
   },
   methods: {
     zoomBy: function(state, k) {
@@ -181,7 +182,7 @@ export default Kapsule({
     newCell.append('circle')
       .attr('id', d => `circle-${d.id}`)
       .attr('r', 0)
-      .style('stroke-width', 1)
+      .style('stroke-width', state.strokeWidth)
       .on('click', (ev, d) => {
         ev.stopPropagation();
         (state.onClick || this.zoomToNode)(d.data);
