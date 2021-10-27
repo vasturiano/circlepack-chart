@@ -9,10 +9,10 @@ circlepack-chart
   <a href="https://vasturiano.github.io/circlepack-chart/example/flare"><img width="80%" src="https://vasturiano.github.io/circlepack-chart/example/preview.png"></a>
 </p>
 
-An interactive circle packing chart for visualizing proportions in hierarchical data, where nodes of a tree are represented as nested circles. 
+An interactive circle packing chart for visualizing proportions in hierarchical data, where nodes of a tree are represented as nested circles.
 
 Supports zooming interactions via mouse-wheel events or by clicking on a node, which focuses the viewport on the associated sub-tree. Clicking in the chart's background resets the zoom to its initial position.
-The chart also responds to data changes by animating the dimensions of each of the nodes into their new positions. 
+The chart also responds to data changes by animating the dimensions of each of the nodes into their new positions.
 
 For improved performance, circles with radius smaller than a given threshold (`minCircleRadius`) are excluded from the DOM, allowing for representation of large data sets while maintaining a smooth interaction. See [here for an example](https://vasturiano.github.io/circlepack-chart/example/large-data) of a randomly generated large data structure.
 
@@ -65,6 +65,7 @@ myChart
 | <b>onHover</b>([<i>fn</i>]) | Callback function for mouse hover events. Includes the data node object (or `null` if hovering on background) as single argument. | |
 | <b>onClick</b>([<i>fn</i>]) | Callback function for click events. Includes the data node object (or `null` if clicking on the background) as single argument. A falsy value (default) automatically zooms on clicked circles, equivalent to `myChart.onClick(myChart.zoomToNode)`. | |
 | <b>transitionDuration</b>([<i>number</i>]) | Getter/setter for the animation duration of transitions between states (opening, zoom in/out) in milliseconds. Enter `0` to disable animations. | `800` |
+| <b>strokeWidth</b>([<i>number</i>]) | Getter/setter for the circles stroke width. | `1` |
 
 ## Data syntax
 
