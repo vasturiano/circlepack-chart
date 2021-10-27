@@ -76,6 +76,9 @@ export interface CirclePackChartGenericInstance<ChainableInstance> {
 
   transitionDuration(): number;
   transitionDuration(duration: number): ChainableInstance;
+
+  strokeWidth(): number;
+  strokeWidth(width: number): ChainableInstance;
 }
 
 export type CirclePackChartInstance = CirclePackChartGenericInstance<CirclePackChartInstance>;
