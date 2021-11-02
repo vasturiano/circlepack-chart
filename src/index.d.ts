@@ -47,6 +47,8 @@ export interface CirclePackChartGenericInstance<ChainableInstance> {
   padding(padding: number): ChainableInstance;
   color(): NodeAccessor<string>;
   color(colorAccessor: NodeAccessor<string>): ChainableInstance;
+  borderWidth(): NodeAccessor<string>;
+  borderWidth(borderWidthAccessor: NodeAccessor<string>): ChainableInstance;
   nodeClassName(): NodeAccessor<string>;
   nodeClassName(nodeClassName: NodeAccessor<string>): ChainableInstance;
 

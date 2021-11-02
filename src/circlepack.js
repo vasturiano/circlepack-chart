@@ -25,6 +25,7 @@ export default Kapsule({
     },
     padding: { default: 4, onChange(_, state) { state.needsReparse = true }},
     color: { default: d => 'lightgrey' },
+    borderWidth: { default: 1 },
     nodeClassName: {}, // Additional css classes to add on each circle node
     minCircleRadius: { default: 3 },
     excludeRoot: { default: false, onChange(_, state) { state.needsReparse = true }},
@@ -165,6 +166,7 @@ export default Kapsule({
 
     const nameOf = accessorFn(state.label);
     const colorOf = accessorFn(state.color);
+    const borderWidthOf = accessorFn(state.borderWidth);
     const nodeClassNameOf = accessorFn(state.nodeClassName);
 
     const animate = !state.skipTransitionsOnce;
@@ -181,7 +183,7 @@ export default Kapsule({
     newCell.append('circle')
       .attr('id', d => `circle-${d.id}`)
       .attr('r', 0)
-      .style('stroke-width', 1)
+      .style('stroke-width', d => borderWidthOf(d.data))
       .on('click', (ev, d) => {
         ev.stopPropagation();
         (state.onClick || this.zoomToNode)(d.data);
@@ -232,7 +234,7 @@ export default Kapsule({
     allCells.select('circle').transition(transition)
       .attr('r', d => d.r)
       .style('fill', d => colorOf(d.data, d.parent))
-      .style('stroke-width', 1 / zoomTr.k);
+      .style('stroke-width', d => borderWidthOf(d.data) / zoomTr.k);
 
     allCells.select('g.label-container')
       .style('display', state.showLabels ? null : 'none');

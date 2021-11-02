@@ -51,6 +51,7 @@ myChart
 | <b>size</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object size accessor, used to compute the areas of the circles. | `value` |
 | <b>padding</b>([<i>number</i>]) | Getter/setter for the amount of padding between adjacent circles, in px. | `4` |
 | <b>color</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object color accessor, used to color the circles. | <i>grey</i> |
+| <b>borderWidth</b>([<i>number</i>, <i>string</i> or <i>fn</i>]) | Getter/setter for a node object border width accessor, used to set the stroke width of each circle. | `1` |
 | <b>nodeClassName</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object classname accessor. Determines the CSS class(es) to apply to each circle node. |
 | <b>minCircleRadius</b>([<i>number</i>]) | Getter/setter for the minimum radius of a circle (in px) required for it to be rendered in the DOM. | `3` |
 | <b>excludeRoot</b>([<i>boolean</i>]) | Getter/setter for whether to exclude the root node from the representation. | `false` |
