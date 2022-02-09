@@ -69,7 +69,7 @@ myChart
 
 ## Data syntax
 
-```json
+```js
 {
   name: "root",
   children: [
