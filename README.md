@@ -3,7 +3,7 @@ circlepack-chart
 
 [![NPM package][npm-img]][npm-url]
 [![Build Size][build-size-img]][build-size-url]
-[![Dependencies][dependencies-img]][dependencies-url]
+[![NPM Downloads][npm-downloads-img]][npm-downloads-url]
 
 <p align="center">
   <a href="https://vasturiano.github.io/circlepack-chart/example/flare"><img width="80%" src="https://vasturiano.github.io/circlepack-chart/example/preview.png"></a>
@@ -20,23 +20,23 @@ See also the [Treemap](https://github.com/vasturiano/treemap-chart), [Icicle](ht
 
 ## Quick start
 
-```
+```js
 import CirclePack from 'circlepack-chart';
 ```
 or
-```
+```js
 const CirclePack = require('circlepack-chart');
 ```
 or even
-```
+```html
 <script src="//unpkg.com/circlepack-chart"></script>
 ```
 then
-```
-var myChart = CirclePack();
+```js
+const myChart = CirclePack();
 myChart
-    .data(<myData>)
-    (<myDOMElement>);
+  .data(<myData>)
+  (<myDOMElement>);
 ```
 
 ## API reference
@@ -69,7 +69,7 @@ myChart
 
 ## Data syntax
 
-```
+```json
 {
   name: "root",
   children: [
@@ -98,9 +98,9 @@ myChart
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=L398E7PKP47E8&currency_code=USD&source=url) If this project has helped you and you'd like to contribute back, you can always [buy me a ☕](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=L398E7PKP47E8&currency_code=USD&source=url)!
 
-[npm-img]: https://img.shields.io/npm/v/circlepack-chart.svg
+[npm-img]: https://img.shields.io/npm/v/circlepack-chart
 [npm-url]: https://npmjs.org/package/circlepack-chart
-[build-size-img]: https://img.shields.io/bundlephobia/minzip/circlepack-chart.svg
+[build-size-img]: https://img.shields.io/bundlephobia/minzip/circlepack-chart
 [build-size-url]: https://bundlephobia.com/result?p=circlepack-chart
-[dependencies-img]: https://img.shields.io/david/vasturiano/circlepack-chart.svg
-[dependencies-url]: https://david-dm.org/vasturiano/circlepack-chart
+[npm-downloads-img]: https://img.shields.io/npm/dt/circlepack-chart
+[npm-downloads-url]: https://www.npmtrends.com/circlepack-chart
