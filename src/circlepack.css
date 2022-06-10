@@ -30,25 +30,17 @@
   fill: #F7F7F7;
 }
 
-.circlepack-viz {
-  position: relative;
-}
-
-.circlepack-tooltip {
-  display: none;
-  position: absolute;
+.circlepack-viz .tooltip {
   max-width: 320px;
   white-space: nowrap;
-  padding: 5px;
-  border-radius: 3px;
-  font: 12px sans-serif;
-  color: #eee;
-  background: rgba(0,0,0,0.65);
-  pointer-events: none;
 }
 
-.circlepack-tooltip .tooltip-title {
+.circlepack-viz .tooltip-title {
   font-weight: bold;
   text-align: center;
   margin-bottom: 5px;
+}
+
+.circlepack-viz {
+  position: relative;
 }

@@ -1,4 +1,4 @@
-import { select as d3Select, pointer as d3Pointer } from 'd3-selection';
+import { select as d3Select } from 'd3-selection';
 import { scaleLinear } from 'd3-scale';
 import { hierarchy as d3Hierarchy, pack as d3Pack } from 'd3-hierarchy';
 import { transition as d3Transition } from 'd3-transition';
@@ -7,6 +7,7 @@ import zoomable from 'd3-zoomable';
 import Kapsule from 'kapsule';
 import tinycolor from 'tinycolor2';
 import accessorFn from 'accessor-fn';
+import Tooltip from 'float-tooltip';
 
 const LABELS_WIDTH_OPACITY_SCALE = scaleLinear().domain([4, 8]).clamp(true); // px per char
 
@@ -104,17 +105,7 @@ export default Kapsule({
     state.svg = el.append('svg');
     state.canvas = state.svg.append('g');
 
-    // tooltips
-    state.tooltip = el.append('div')
-      .attr('class', 'chart-tooltip circlepack-tooltip');
-
-    el.on('mousemove', function(ev) {
-      const mousePos = d3Pointer(ev);
-      state.tooltip
-        .style('left', mousePos[0] + 'px')
-        .style('top', mousePos[1] + 'px')
-        .style('transform', `translate(-${mousePos[0] / state.width * 100}%, 21px)`); // adjust horizontal position to not exceed canvas boundaries
-    });
+    state.tooltip = Tooltip()(el);
 
     // zoom/pan
     state.zoom(state.svg)
@@ -192,8 +183,7 @@ export default Kapsule({
         ev.stopPropagation();
         state.onHover && state.onHover(d.data);
 
-        state.tooltip.style('display', state.showTooltip(d.data, d) ? 'inline' : 'none');
-        state.tooltip.html(`
+        state.tooltip.content(!!state.showTooltip(d.data, d) && `
           <div class="tooltip-title">
             ${state.tooltipTitle
               ? state.tooltipTitle(d.data, d)
@@ -206,7 +196,7 @@ export default Kapsule({
           ${state.tooltipContent(d.data, d)}
         `);
       })
-      .on('mouseout', () => { state.tooltip.style('display', 'none'); });
+      .on('mouseout', () => state.tooltip.content(false));
 
     newCell.append('clipPath')
       .attr('id', d => `clip-${d.id}`)
