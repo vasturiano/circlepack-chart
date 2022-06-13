@@ -174,7 +174,7 @@ export default Kapsule({
     newCell.append('circle')
       .attr('id', d => `circle-${d.id}`)
       .attr('r', 0)
-      .style('stroke-width', d => borderWidthOf(d.data))
+      .style('stroke-width', d => `${borderWidthOf(d.data)}px`)
       .on('click', (ev, d) => {
         ev.stopPropagation();
         (state.onClick || this.zoomToNode)(d.data);
@@ -224,7 +224,7 @@ export default Kapsule({
     allCells.select('circle').transition(transition)
       .attr('r', d => d.r)
       .style('fill', d => colorOf(d.data, d.parent))
-      .style('stroke-width', d => borderWidthOf(d.data) / zoomTr.k);
+      .style('stroke-width', d => `${borderWidthOf(d.data) / zoomTr.k}px`);
 
     allCells.select('g.label-container')
       .style('display', state.showLabels ? null : 'none');
@@ -238,7 +238,7 @@ export default Kapsule({
         .classed('light', d => !tinycolor(colorOf(d.data, d.parent)).isLight())
         .text(d => nameOf(d.data))
         .transition(transition)
-          .style('opacity', d => LABELS_WIDTH_OPACITY_SCALE((d.r * 2) * zoomTr.k / nameOf(d.data).length))
+          .style('opacity', d => `${LABELS_WIDTH_OPACITY_SCALE((d.r * 2) * zoomTr.k / nameOf(d.data).length)}`)
           .attrTween('transform', function () {
             const kTr = d3Interpolate(prevK, zoomTr.k);
             return t => `scale(${1 / kTr(t)})`;
