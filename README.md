@@ -23,11 +23,7 @@ See also the [Treemap](https://github.com/vasturiano/treemap-chart), [Icicle](ht
 ```js
 import CirclePack from 'circlepack-chart';
 ```
-or
-```js
-const CirclePack = require('circlepack-chart');
-```
-or even
+or using a *script* tag
 ```html
 <script src="//unpkg.com/circlepack-chart"></script>
 ```
