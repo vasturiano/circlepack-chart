@@ -35,6 +35,7 @@ export default Kapsule({
     tooltipTitle: { default: null, triggerUpdate: false },
     tooltipContent: { default: d => '', triggerUpdate: false },
     onClick: { triggerUpdate: false },
+    onRightClick: { triggerUpdate: false },
     onHover: { triggerUpdate: false },
     transitionDuration: { default: 800, triggerUpdate: false }
   },
@@ -123,8 +124,14 @@ export default Kapsule({
       });
 
     state.svg
-      .on('click', () => (state.onClick || this.zoomReset)(null)) // By default reset zoom when clicking on canvas
-      .on('mouseover', () => state.onHover && state.onHover(null));
+      .on('click', ev => (state.onClick || this.zoomReset)(null, ev)) // By default reset zoom when clicking on canvas
+      .on('contextmenu', ev => {
+        if (state.onRightClick) { // By default do nothing when right-clicking on canvas
+          state.onRightClick(null, ev);
+          ev.preventDefault();
+        }
+      })
+      .on('mouseover', ev => state.onHover && state.onHover(null, ev));
   },
   update: function(state) {
     if (state.needsReparse) {
@@ -177,11 +184,18 @@ export default Kapsule({
       .style('stroke-width', d => `${borderWidthOf(d.data)}px`)
       .on('click', (ev, d) => {
         ev.stopPropagation();
-        (state.onClick || this.zoomToNode)(d.data);
+        (state.onClick || this.zoomToNode)(d.data, ev);
+      })
+      .on('contextmenu', (ev, d) => {
+        ev.stopPropagation();
+        if (state.onRightClick) {
+          state.onRightClick(d.data, ev);
+          ev.preventDefault();
+        }
       })
       .on('mouseover', (ev, d) => {
         ev.stopPropagation();
-        state.onHover && state.onHover(d.data);
+        state.onHover && state.onHover(d.data, ev);
 
         state.tooltip.content(!!state.showTooltip(d.data, d) && `
           <div class="tooltip-title">
