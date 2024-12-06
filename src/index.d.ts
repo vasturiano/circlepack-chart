@@ -27,62 +27,58 @@ type CompareFn<ItemType> = (a: ItemType, b: ItemType) => number;
 
 type TooltipFn = (node: Node, dataNode: DataNode) => string;
 
-export interface CirclePackChartGenericInstance<ChainableInstance> {
-  (element: HTMLElement): ChainableInstance;
+declare class CirclePackChart {
+  constructor(element: HTMLElement, configOptions?: ConfigOptions);
 
   width(): number;
-  width(width: number): ChainableInstance;
+  width(width: number): CirclePackChart;
   height(): number;
-  height(height: number): ChainableInstance;
+  height(height: number): CirclePackChart;
 
   data(): Node;
-  data(rootNode: Node): ChainableInstance;
+  data(rootNode: Node): CirclePackChart;
   children(): NodeAccessor<Node[]>;
-  children(childrenAccessor: NodeAccessor<Node[]>): ChainableInstance;
+  children(childrenAccessor: NodeAccessor<Node[]>): CirclePackChart;
   label(): NodeAccessor<string>;
-  label(textAccessor: NodeAccessor<string>): ChainableInstance;
+  label(textAccessor: NodeAccessor<string>): CirclePackChart;
   size(): NodeAccessor<string>;
-  size(sizeAccessor: NodeAccessor<string>): ChainableInstance;
+  size(sizeAccessor: NodeAccessor<string>): CirclePackChart;
   padding(): number;
-  padding(padding: number): ChainableInstance;
+  padding(padding: number): CirclePackChart;
   color(): NodeAccessor<string>;
-  color(colorAccessor: NodeAccessor<string>): ChainableInstance;
+  color(colorAccessor: NodeAccessor<string>): CirclePackChart;
   borderWidth(): NodeAccessor<string>;
-  borderWidth(borderWidthAccessor: NodeAccessor<string>): ChainableInstance;
+  borderWidth(borderWidthAccessor: NodeAccessor<string>): CirclePackChart;
   nodeClassName(): NodeAccessor<string>;
-  nodeClassName(nodeClassName: NodeAccessor<string>): ChainableInstance;
+  nodeClassName(nodeClassName: NodeAccessor<string>): CirclePackChart;
 
   minCircleRadius(): number;
-  minCircleRadius(r: number): ChainableInstance;
+  minCircleRadius(r: number): CirclePackChart;
   excludeRoot(): boolean;
-  excludeRoot(exclude: boolean): ChainableInstance;
+  excludeRoot(exclude: boolean): CirclePackChart;
 
   sort(): CompareFn<Node> | null;
-  sort(cmpFn: CompareFn<Node> | null): ChainableInstance;
+  sort(cmpFn: CompareFn<Node> | null): CirclePackChart;
 
   showLabels(): boolean;
-  showLabels(show: boolean): ChainableInstance;
+  showLabels(show: boolean): CirclePackChart;
   showTooltip(): (node: Node) => boolean;
-  showTooltip(showTooltipFn: (node: Node) => boolean): ChainableInstance;
+  showTooltip(showTooltipFn: (node: Node) => boolean): CirclePackChart;
   tooltipTitle(): TooltipFn;
-  tooltipTitle(fn: TooltipFn): ChainableInstance;
+  tooltipTitle(fn: TooltipFn): CirclePackChart;
   tooltipContent(): TooltipFn;
-  tooltipContent(fn: TooltipFn): ChainableInstance;
+  tooltipContent(fn: TooltipFn): CirclePackChart;
 
-  onClick(cb: ((node: Node, event: MouseEvent) => void) | null): ChainableInstance;
-  onRightClick(cb: ((node: Node, event: MouseEvent) => void) | null): ChainableInstance;
-  onHover(cb: ((node: Node | null, event: MouseEvent) => void) | null): ChainableInstance;
+  onClick(cb: ((node: Node, event: MouseEvent) => void) | null): CirclePackChart;
+  onRightClick(cb: ((node: Node, event: MouseEvent) => void) | null): CirclePackChart;
+  onHover(cb: ((node: Node | null, event: MouseEvent) => void) | null): CirclePackChart;
 
-  zoomToNode(node: Node): ChainableInstance;
-  zoomBy(k: number):ChainableInstance;
-  zoomReset():ChainableInstance;
+  zoomToNode(node: Node): CirclePackChart;
+  zoomBy(k: number):CirclePackChart;
+  zoomReset():CirclePackChart;
 
   transitionDuration(): number;
-  transitionDuration(duration: number): ChainableInstance;
+  transitionDuration(duration: number): CirclePackChart;
 }
-
-export type CirclePackChartInstance = CirclePackChartGenericInstance<CirclePackChartInstance>;
-
-declare function CirclePackChart(configOptions?: ConfigOptions): CirclePackChartInstance;
 
 export default CirclePackChart;

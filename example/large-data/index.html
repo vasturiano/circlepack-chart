@@ -31,13 +31,12 @@
 
     const color = d3.scaleOrdinal(d3.schemePaired);
 
-    CirclePack()
+    new CirclePack(document.getElementById('chart'))
       .data(genNode())
       .color(d => color(d.name))
       .showLabels(false)
       .minCircleRadius(8)
       .excludeRoot(true)
-      .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
-      (document.getElementById('chart'));
+      .tooltipContent((d, node) => `Size: <i>${node.value}</i>`);
   </script>
 </body>
